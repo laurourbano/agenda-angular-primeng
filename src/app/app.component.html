@@ -1,21 +1,72 @@
-<div>
-  <h1>Agenda</h1>
-  <label>
-    Nome:
-    <input type="text" />
-  </label>
-  <label>
-    Telefone:
-    <input type="text" />
-  </label>
-  <label>
-    E-mail:
-    <input type="text" />
-  </label>
-  <label>
-    Endereço:
-    <input type="text" />
-  </label>
-  <button type="button">Pesquisar</button>
+<div class="container-app">
+<p-toolbar styleClass="bg-gray-900 shadow-2"
+  [style]="{ 'border-radius': '3rem', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+  <ng-template pTemplate="start">
+    <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+  </ng-template>
+  <ng-template pTemplate="center">
+    <div class="flex flex-wrap align-items-center gap-3 icones">
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+          class="pi pi-home text-2xl"></i></button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+          class="pi pi-user text-2xl"></i></button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+          class="pi pi-search text-2xl"></i></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex align-items-center gap-2 perfil">
+      <p-avatar image="https://avatars.githubusercontent.com/u/74082012?s=100&v=4" shape="circle" />
+      <span class="font-bold text-bluegray-50">Lauro Otávio Urbano</span>
+    </div>
+  </ng-template>
+</p-toolbar>
+
+  <form [formGroup]="form">
+    <h1>{{title}}</h1>
+    <div class="container">
+      <div class="p-float-label">
+        <input type="text" id="nome" formControlName="nome" pInputText placeholder="Ex. José da Silva" />
+        <label for="nome">Nome: </label>
+      </div>
+      <div class="p-float-label">
+        <p-inputMask type="phone" mask="+99 (99) 99999-9999" id="telefone" formControlName="telefone"></p-inputMask>
+        <label for="telefone">Telefone: </label>
+      </div>
+      <div class="p-float-label">
+        <input type="mail" id="email" formControlName="email" pInputText />
+        <label for="email">E-mail: </label>
+      </div>
+      <div class="p-float-label">
+        <input type="text" id="endereco" formControlName="endereco" pInputText />
+        <label for="endereco">Endereço: </label>
+      </div>
+      <div class="p-button-right">
+        <p-button pRipple [outlined]="true" label="Enviar" severity="success" (click)="onSubmit()" enter></p-button>
+      </div>
+    </div>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Endereço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contato of contatos">
+        <td>{{contato.nome}}</td>
+        <td>{{contato.telefone}}</td>
+        <td>{{contato.email}}</td>
+        <td>{{contato.endereco}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 <router-outlet></router-outlet>
